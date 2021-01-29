@@ -1,0 +1,484 @@
+{
+  "version": 2,
+  "tables": [
+    {
+      "table": {
+        "schema": "public",
+        "name": "accounts"
+      },
+      "object_relationships": [
+        {
+          "name": "payee",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "payees"
+              },
+              "column_mapping": {
+                "id": "transfer_acct"
+              }
+            }
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "pending_transactions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "account_id",
+              "table": {
+                "schema": "public",
+                "name": "pending_transactions"
+              }
+            }
+          }
+        },
+        {
+          "name": "transactions",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "transactions"
+              },
+              "column_mapping": {
+                "id": "account_id"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "account_id",
+              "name",
+              "balance_current",
+              "balance_available",
+              "balance_limit",
+              "mask",
+              "official_name",
+              "type",
+              "subtype",
+              "bank",
+              "offbudget",
+              "closed",
+              "tombstone"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "banks"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "bank_id",
+              "name",
+              "tombstone"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "categories"
+      },
+      "object_relationships": [
+        {
+          "name": "group",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "category_groups"
+              },
+              "column_mapping": {
+                "cat_group": "id"
+              }
+            }
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "transactions",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "transactions"
+              },
+              "column_mapping": {
+                "id": "category_id"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "is_income",
+              "cat_group",
+              "sort_order",
+              "tombstone"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "category_groups"
+      },
+      "array_relationships": [
+        {
+          "name": "categories",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "categories"
+              },
+              "column_mapping": {
+                "id": "cat_group"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "is_income",
+              "sort_order",
+              "tombstone"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "created_budgets"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "month"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "messages_clock"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "clock"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "messages_crdt"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "timestamp",
+              "dataset",
+              "row",
+              "col",
+              "value"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "payee_rules"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "payee_id",
+              "type",
+              "value",
+              "tombstone"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "payees"
+      },
+      "object_relationships": [
+        {
+          "name": "account",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "accounts"
+              },
+              "column_mapping": {
+                "transfer_acct": "id"
+              }
+            }
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "transactions",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "transactions"
+              },
+              "column_mapping": {
+                "id": "payee_id"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "category",
+              "tombstone",
+              "transfer_acct"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "pending_transactions"
+      },
+      "object_relationships": [
+        {
+          "name": "account",
+          "using": {
+            "foreign_key_constraint_on": "account_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "account_id",
+              "amount",
+              "payee_id",
+              "date"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "rules"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "stage",
+              "conditions",
+              "actions",
+              "tombstone"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "spreadsheet_cells"
+      },
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "name",
+              "expr",
+              "cachedvalue"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "transactions"
+      },
+      "object_relationships": [
+        {
+          "name": "account",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "accounts"
+              },
+              "column_mapping": {
+                "account_id": "id"
+              }
+            }
+          }
+        },
+        {
+          "name": "category",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "categories"
+              },
+              "column_mapping": {
+                "category_id": "id"
+              }
+            }
+          }
+        },
+        {
+          "name": "payee",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "payees"
+              },
+              "column_mapping": {
+                "payee_id": "id"
+              }
+            }
+          }
+        },
+        {
+          "name": "transfer",
+          "using": {
+            "manual_configuration": {
+              "remote_table": {
+                "schema": "public",
+                "name": "transactions"
+              },
+              "column_mapping": {
+                "transferred_id": "id"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "user",
+          "permission": {
+            "columns": [
+              "id",
+              "isparent",
+              "ischild",
+              "account_id",
+              "category_id",
+              "amount",
+              "payee_id",
+              "notes",
+              "date",
+              "financial_id",
+              "type",
+              "location",
+              "error",
+              "imported_description",
+              "starting_balance_flag",
+              "transferred_id",
+              "sort_order",
+              "tombstone",
+              "cleared",
+              "pending"
+            ],
+            "filter": {}
+          }
+        }
+      ]
+    }
+  ]
+}

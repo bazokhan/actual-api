@@ -1,0 +1,19 @@
+{
+  "name": "actual-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mohamed Elbaz <albaz2000eg@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "hasura-cli": "^1.3.3"
+  },
+  "scripts": {
+    "apply:mg": "hasura migrate apply",
+    "apply:mt": "hasura metadata apply",
+    "deploy": "yarn apply:mg && yarn apply:mt",
+    "dev": "hasura console",
+    "squash": "hasura migrate squash",
+    "down": "hasura migrate apply --down 1",
+    "status": "hasura migrate status"
+  }
+}

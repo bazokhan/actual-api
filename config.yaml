@@ -1,0 +1,11 @@
+version: 2
+endpoint:
+  # https://prime-tetra-59.hasura.app
+  http://localhost:8686
+admin_secret:
+  # vzUcMBq4zb8yypr
+  myadminsecretkey
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
