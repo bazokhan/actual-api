@@ -18,7 +18,6 @@ services:
     restart: always
     environment:
       HASURA_GRAPHQL_AUTH_HOOK: https://pacific-coast-90135.herokuapp.com/webhook
-      HASURA_GRAPHQL_CORS_DOMAIN: http://localhost:3000,https://vibrant-poitras-805495.netlify.app
       HASURA_GRAPHQL_SERVER_PORT: 8686
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
