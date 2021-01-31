@@ -1,0 +1,20 @@
+DROP INDEX IF EXISTS payee_rules_lowercase_index;
+DROP INDEX IF EXISTS trans_category;
+DROP INDEX IF EXISTS trans_category_date;
+DROP INDEX IF EXISTS trans_date;
+DROP TABLE public.accounts CASCADE;
+DROP TABLE public.banks CASCADE;
+DROP TABLE public.categories CASCADE;
+DROP TABLE public.category_groups CASCADE;
+DROP TABLE public.created_budgets CASCADE;
+DROP TABLE public.messages_clock CASCADE;
+DROP TABLE public.messages_crdt CASCADE;
+DROP TABLE public.payee_rules CASCADE;
+DROP TABLE public.payees CASCADE;
+DROP TABLE public.pending_transactions CASCADE;
+DROP TABLE public.rules CASCADE;
+DROP TABLE public.spreadsheet_cells CASCADE;
+DROP TABLE public.transactions CASCADE;
+DROP TABLE public.__migrations__ CASCADE;
+DROP SEQUENCE IF EXISTS public.__migrations___id_seq;
+
