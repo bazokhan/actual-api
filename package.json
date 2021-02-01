@@ -11,6 +11,7 @@
     "hasura": "hasura",
     "migrate": "hasura migrate",
     "metadata": "hasura metadata",
+    "seeds": "hasura seeds",
     "apply:mg": "hasura migrate apply",
     "apply:mt": "hasura metadata apply",
     "deploy": "yarn apply:mg && yarn apply:mt",

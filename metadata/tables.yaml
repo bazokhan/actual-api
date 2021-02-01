@@ -1,6 +1,18 @@
 - table:
     schema: public
     name: accounts
+  object_relationships:
+  - name: owner
+    using:
+      foreign_key_constraint_on: accountID
+  - name: payee
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: payees
+        column_mapping:
+          id: accountID
   array_relationships:
   - name: transactions
     using:
@@ -48,6 +60,14 @@
 - table:
     schema: public
     name: groups
+  array_relationships:
+  - name: categories
+    using:
+      foreign_key_constraint_on:
+        column: groupID
+        table:
+          schema: public
+          name: categories
 - table:
     schema: public
     name: messages_clock
