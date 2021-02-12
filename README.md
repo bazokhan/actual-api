@@ -22,3 +22,6 @@ Step 5 (optional): Apply metadata:
 export metadata from remote origin using console
 import metadata to local using console
 
+
+to delete migrations from the database use the following SQL:
+TRUNCATE hdb_catalog.schema_migrations;
